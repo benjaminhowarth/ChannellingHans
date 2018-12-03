@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Channelling Hans</title>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./index.css">
+
+	<style type="text/css">
+		.countrylabel{
+		    color: blue;
+		}
+	</style>
+	</head>
+
+	<body>	
+		<!--SEARCH FOR NOTES WITH *N-->
+		<div id = "Title">
+			<h1 style="color: red">Channelling Hans</h1>
+		</div>
+		<div id = "Graph">
+			<div id="YearDiv">
+			<h1 id="Year"></h1>
+			<h1 id= "Year2"></h1>
+			</div>
+			<div id="vis">
+			  <button id="play-button">Play</button>
+                <button onclick =barChart("China")>Barchart</button>
+			</div>
+		</div>
+			<!--
+			***NOTES***
+			aggregate mean mode 
+			interpolation linear python package input row 
+			-->
+			
+		<script type="text/javascript" src="./js/main.js" charset="UTF-8"></script>
+		
+		<script type="text/javascript" src="./js/time_slider.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="./js/barChart.js" charset="UTF-8"></script>
+		
+	</body>
+</html>
