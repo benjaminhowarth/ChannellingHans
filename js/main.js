@@ -20,7 +20,7 @@ yearTitleElement.style.color = "grey";
 yearTitleElement.style.fontSize = "200px";
 yearTitleElement.style.opacity = ".6";
 yearTitleElement.style.fontFamily = "Roboto";
-yearTitleDiv.style.zIndex = "10";
+yearTitleDiv.style.zIndex = "-10";
 yearTitleDiv.style.position = "absolute";
 //				yearTitleDiv.style.width = "100%";
 yearTitleDiv.style.left = "350px";
@@ -99,6 +99,7 @@ var xAxis = d3.axisBottom()
 
 //-_-_-M_-_-_A-_-_-I_-_-_N-_-_-
 //   VISUALISATION FUNCTION
+var drag = d3.drag();
 function generateVis(){
 
 	// Filter the data to only include the current year
@@ -107,8 +108,8 @@ function generateVis(){
 	/******** PERFORM DATA JOIN ************/
 	// Join new data with old elements, if any.
 	var circles = canvas.selectAll("circle")
-	   .data(filtered_dataset, function key(d) {return d.Country});
-
+	   .data(filtered_dataset);
+    
 	var texts = canvas.selectAll(".countrylabel")
 			.data(filtered_dataset, function key(d){return d.Country});
 
@@ -118,7 +119,9 @@ function generateVis(){
 	// *N Check for problem here
 	circles.enter()
 	   .append("circle")
-		.attr("cx", function(d){ return xScale(+d.GDP)
+		.attr("cx", function(d){
+        console.log("stuff");
+        return xScale(+d.GDP)
 	   })
 
 	   .attr("cy", function(d){ return yScale(+d.Global_Competitiveness_Index)})
@@ -126,7 +129,12 @@ function generateVis(){
 	   .attr("r", function(d){return radiusScale(+d.Population)})
 		.style("fill", function(d){ return colourScale(d.Region)})
 	   .style("opacity", .7)
-	   .transition()
+
+        .on("click", function (d) {
+            barChart(d.Country);
+            console.log(d.Country);
+        })	   
+        .transition()
 	   .duration(1000);
 
 	texts.enter()
