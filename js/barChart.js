@@ -19,7 +19,7 @@ var chart = d3.select("body")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 function barChart(...countries) {
-    
+    countries=countries;
     var columns = [];
 
     function countryFilter(value) {
@@ -45,7 +45,7 @@ function barChart(...countries) {
     // Create a scale object to take care of positioning bars along the horizontal axis
     var xScale = d3.scaleBand()
         .domain(chart_dataset.map(function (d) {
-            return d.Company;
+            return d.Country;
         }))
         .range([0, svg_width], 0.1)
         .paddingInner(0.05)
@@ -88,5 +88,21 @@ function barChart(...countries) {
             return yScale(d);
         })
         .attr("fill", "blue");
-
+    // transitions 
+    chart.selectAll("rect")
+        .data(columns[0].values)
+        .transition()
+        .duration(500)
+        .attr("x", function (d, i) {
+            return i * (svg_width / columns[0].values.length);
+        })
+        .attr("y", function (d) {
+            return parseInt(svg_height - yScale(d));
+        })
+        .attr("width", (svg_width / columns[0].values.length) - barPadding)
+        .attr("height", function (d) {
+            return yScale(d);
+        })
+        .attr("fill", "red");
+        
 }
