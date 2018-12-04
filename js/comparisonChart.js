@@ -18,14 +18,17 @@ var chart = d3.select("body")
     .attr("height", svg_height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-function barChart(countries) {
+function comparisonBarChart(countries) {
     
     var columns = [];
-
+    var i;
     function countryFilter(value) {
-        return (value.Country == countries);
+        return (value.Country == countries[0]);
     }
-
+    function secondCountryFilter(value){
+        return (value.Country == countries[1]);
+    }
+    
     var filtered_datset = dataset.filter(yearFilter);
     var chart_dataset = filtered_datset.filter(countryFilter);
     chart_dataset.forEach(function (r) {
@@ -34,7 +37,16 @@ function barChart(countries) {
             values: [r['1st_pillar_Institutions'], r['2nd_pillar_Infrastructure'], r['3rd_pillar_Macroeconomic_environment'], r['4th_pillar_Health_and_primary_education'], r['5th_pillar_Higher_education_and_training'], r['6th_pillar_Goods_market_efficiency'], r['7th_pillar_Labor_market_efficiency'], r['8th_pillar_Financial_market_development'], r['9th_pillar_Technological_readiness'], r['10th_pillar_Market_size'], r['11th_pillar_Business_sophistication_'], r['12th_pillar_Innovation']]
         })
     });
-
+    if(selected_countries.length>1){
+        var secondDataSet = filtered_datset.filter(secondCountryFilter);
+        secondDataSet.forEach(function (r) {
+        columns.push({
+            name: r.Country,
+            values: [r['1st_pillar_Institutions'], r['2nd_pillar_Infrastructure'], r['3rd_pillar_Macroeconomic_environment'], r['4th_pillar_Health_and_primary_education'], r['5th_pillar_Higher_education_and_training'], r['6th_pillar_Goods_market_efficiency'], r['7th_pillar_Labor_market_efficiency'], r['8th_pillar_Financial_market_development'], r['9th_pillar_Technological_readiness'], r['10th_pillar_Market_size'], r['11th_pillar_Business_sophistication_'], r['12th_pillar_Innovation']]
+        })
+    });
+    }
+    console.log(columns);
 
 
     //                    // Create a scale to scale values nicely for bar heights
@@ -73,9 +85,9 @@ function barChart(countries) {
         .call(yAxis);
                         
     // Add rectangles
-
+    console.log(columns[0]);
     chart.selectAll("rect")
-        .data(columns[0].values)
+        .data(columns[1].values)
         .enter()
         .append("rect")
         .attr("x", function (d, i) {
@@ -88,7 +100,14 @@ function barChart(countries) {
         .attr("height", function (d) {
             return yScale(d);
         })
-        .attr("fill", "blue");
+        .attr("fill",function(d){
+            if(columns[0].name== countries[0]){
+                return "red"
+            }
+            else{
+                return "blue"
+            }
+    });
     // transitions 
     chart.selectAll("rect")
         .data(columns[0].values)

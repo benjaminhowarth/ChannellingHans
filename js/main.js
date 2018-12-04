@@ -30,6 +30,19 @@ yearTitleDiv.style.top = "300px";
 var selected_country;
 var selected_countries = [];
 
+// function to implement queue for counties
+function addCountry(country){
+    if (selected_countries.length < 2){
+        selected_countries.push(country);
+        
+    }
+    else{
+        console.log(selected_countries);
+        selected_countries.pop();
+        selected_countries.unshift(country);
+    }
+}
+
 
 //_-_-_C-_-_-A_-_-_N-_-_-V_-_-_A-_-_-S_-_-_
 //SOME CODE TAKEN FROM PRACTICAL 5 SOLUTION
@@ -131,8 +144,8 @@ function generateVis(){
 	   .style("opacity", .7)
 
         .on("click", function (d) {
-            barChart(d.Country);
-            console.log(d.Country);
+            addCountry(d.Country);
+            comparisonBarChart(selected_countries);
         })	   
         .transition()
 	   .duration(1000);
@@ -144,6 +157,10 @@ function generateVis(){
 		.attr("fill", "black")
 		.attr("class", "countrylabel")
 		.attr("font-size", function(d){return radiusScale(+d.Population)})
+         .on("click", function (d) {
+            addCountry(d.Country);
+            comparisonBarChart(selected_countries);
+        })	   
 		.text(function(d){return d.Country})
 
 	/******** HANDLE UPDATE SELECTION ************/
