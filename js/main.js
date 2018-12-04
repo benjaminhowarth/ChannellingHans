@@ -41,8 +41,20 @@ function addCountry(country){
         selected_countries.pop();
         selected_countries.unshift(country);
     }
+    document.getElementById("Countries").innerHTML=selected_countries;
 }
-
+function makeBarChart(selected_countries){
+    if(selected_countries.length==0){
+        
+    }
+    else if (selected_countries.length==1){
+        barChart(selected_countries);
+    }
+    else{
+        barChart(selected_countries);
+        comparisonBarChart(selected_countries);
+    }
+}
 
 //_-_-_C-_-_-A_-_-_N-_-_-V_-_-_A-_-_-S_-_-_
 //SOME CODE TAKEN FROM PRACTICAL 5 SOLUTION
@@ -145,7 +157,7 @@ function generateVis(){
 
         .on("click", function (d) {
             addCountry(d.Country);
-            comparisonBarChart(selected_countries);
+            makeBarChart(selected_countries);
         })	   
         .transition()
 	   .duration(1000);
@@ -159,7 +171,7 @@ function generateVis(){
 		.attr("font-size", function(d){return radiusScale(+d.Population)})
          .on("click", function (d) {
             addCountry(d.Country);
-            comparisonBarChart(selected_countries);
+            makeBarChart(selected_countries);
         })	   
 		.text(function(d){return d.Country})
 

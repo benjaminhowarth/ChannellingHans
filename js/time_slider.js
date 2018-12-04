@@ -155,6 +155,7 @@ function hue(h) {
 	display_year = Math.floor(x.invert(currentValue));
 	if (display_year != old_display_year){
 		generateVis();
+        makeBarChart(selected_countries);
 	}
 	old_display_year = display_year;
 }
