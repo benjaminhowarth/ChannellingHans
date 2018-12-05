@@ -14,8 +14,6 @@ var barPadding = 20;
 
 var chart = d3.select("div#container2")
     .append("svg")
-//    .attr("width", svg_width + margin.left + margin.right)
-//    .attr("height", svg_height + margin.top + margin.bottom)
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "-30 -50 750 750")
     .classed("svg_content", true)
@@ -113,6 +111,14 @@ function barChart(countries) {
     chart.append("g")
         .attr("class", "axis")
         .call(yAxis);
+                
+    chart.append("text")
+		.attr("class", "axis")
+		.attr("x", -svg_width/1.2)
+		.attr("y", -16)
+        .text("Global Competitiveness Index")
+           .style("font-size", "1.4vw")
+            .attr("transform", "rotate(-90)");
                         
     // Add rectangles
 
@@ -124,18 +130,7 @@ function barChart(countries) {
         .on("click", function() {
         console.log("clicked");  
     })
-        .on("mouseover", function() {
-            d3.select(this)
-                .transition()
-                .duration(500)
-                .style("opacity", 1);
-        })
-//         .on("mouseout", function (d) {
-//            d3.select(this)
-//                .transition()
-//                .duration(500)
-//                .style("opacity", 0.7)
-//        })
+
         .attr("x", function (d, i) {
             console.log(d);
             return i * (svg_width / columns[0].values.length);
@@ -152,18 +147,6 @@ function barChart(countries) {
     // transitions 
     chart.selectAll("rect")
         .data(columns[0].values)
-        .on("mouseover", function (d) {
-            d3.select(this)
-                .transition()
-                .duration(500)
-                .style("opacity", 1);
-        })
-         .on("mouseout", function (d) {
-            d3.select(this)
-                .transition()
-                .duration(500)
-                .style("opacity", 0.7)
-        })
         .transition()
         .duration(500)
         .attr("x", function (d, i) {

@@ -1,0 +1,35 @@
+For part one of the assignment we generated a html page that makes use of the d3.js library to show the following:
+
+	- A bubble plot representing the countries of the world. 
+
+	- Each countries bubble is scaled by radius relative to their population. We used square root based scaling for this in order to avoid perceptual illusions. They are colour coded by continent. 
+
+	- The X axis uses a logarithmic scale to smooth the appearance of the chart as there is a huge disparity in income across countries which distorted the charts appearance otherwise. The ticks of the axis reflect this logarithmic scale.
+	
+	- The Y axis uses a linear scale as the data for this axis was in a small range so a linear scale was able to tell the story of this data well.
+
+	- Each Country is labeled by their name. Names are scaled relative to population.
+	
+	- We performed data imputation using the pandas library python. For years with missing values we imputed the value of the nearest year.
+	
+	- You are able to view data for a selected year and play the animation of the movement of countries on a continuous loop. 
+	
+	- We feel that the transitions are well designed, we also included mouseover events so that the page would be more responsive to a users navigation
+
+	- We produced clean, quality, well commented, readable code. our code, data and jupyter notebook are included in our submission
+	
+For part two of our assignment we extended our html webpage to add the following features to our visualisation:
+	
+	- Made Svg responsive to screen size
+
+	- A Trails control. The trails control for our visualisation is a checkbox that allows a user to select whether they want to see trails or not. We employed a fainter opacity for the trails than other circles.
+	
+	**- A user is able to select two countries from the chart and see their trails graphed against each other. 
+	**- The user has the option to see the trails against a the static chart for a single year, or see the trails against a moving background.
+	(^^These two features also count towards a well designed and implemented comparison of two countries^^)
+	
+	- Our multi variate visualisation. We employed a multiline bar chart that allows a user to see how a country has performed along each of the 12 pillars that are measured in order to determine the Global Competitiveness Index for the year they are currently viewing. A bar chart was employed as bar charts area  useful chart when a user wishes to compare values in a data set to see where a countries strengths and weaknesses lie. If a user plays the animation the bar chart moves in tandem with this.
+	
+	- Comparison of 2 countries:
+	A user is able to compare two countries by selecting two countries and seeing their values for a given year appear on the chart. They are also able to compare the trails of two years against each other to see how the two countries have changed over time in relation to one another.
+	

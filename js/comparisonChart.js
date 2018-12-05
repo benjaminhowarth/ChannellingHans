@@ -19,9 +19,6 @@ var compChart = d3.select("div#container2")
         .classed("svg_content", true)
     .attr("id", "secondChart")
     .attr("z-index", 10);
-//    .attr("margin",500);
-//    .append("g")
-//    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var countryNameDiv = document.getElementById("CountryDiv2");
 var countryNameElement = document.getElementById("Country2");
@@ -60,27 +57,7 @@ function comparisonBarChart(countries) {
         .paddingInner(0.05)
         .paddingOuter(0.05);
 
-    // Create an x-axis connected to the x scale
-//    var xAxis = d3.axisBottom()
-//        .scale(xScale)
-//        .ticks(12);
-//
-//    //Define Y axis
-//    var yAxis = d3.axisLeft()
-//        .scale(yScale)
-//        .ticks(5);
-//
-//    // Call the x-axis
-//    compChart.append("g")
-//        .attr("class", "axis")
-//        .attr("transform", "translate(0," + svg_height + ")")
-//        .call(xAxis);
-//
-//    // Call the y axis
-//    compChart.append("g")
-//        .attr("class", "axis")
-//        .call(yAxis);
-//                        
+
     // Add rectangles
     
     console.log("comp ",columns);
@@ -89,18 +66,6 @@ function comparisonBarChart(countries) {
         .data(columns[0].values)
         .enter()
         .append("rect")
-        .on("mouseover", function (d) {
-            d3.select(this)
-                .transition()
-                .duration(200)
-                .style("opacity", 1);
-        })
-         .on("mouseout", function (d) {
-            d3.select(this)
-                .transition()
-                .duration(500)
-                .style("opacity", 0.6)
-        })
         .attr("x", function (d, i) {
             return (i * (svg_width / columns[0].values.length));
         })
@@ -123,18 +88,6 @@ function comparisonBarChart(countries) {
     // transitions 
     compChart.selectAll("rect")
         .data(columns[0].values)
-        .on("mouseover", function (d) {
-            d3.select(this)
-                .transition()
-                .duration(500)
-                .style("opacity", 1);
-        })
-         .on("mouseout", function (d) {
-            d3.select(this)
-                .transition()
-                .duration(500)
-                .style("opacity", 0.6)
-        })
         .transition()
         .duration(500)
         .attr("x", function (d, i) {

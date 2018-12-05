@@ -16,14 +16,17 @@ var yearTitleDiv = document.getElementById("YearDiv");
 var yearTitleElement = document.getElementById("Year");
 var year2TitleElement = document.getElementById("Year2");
 yearTitleElement.style.color = "grey";
-yearTitleElement.style.fontSize = "8vw";
+//yearTitleElement.style.fontSize = "8vw";
+yearTitleElement.style.fontSize = "calc(12px + 5vw)";
+
 yearTitleElement.style.opacity = ".6";
 yearTitleElement.style.fontFamily = "Roboto";
 yearTitleDiv.style.zIndex = "-10";
 yearTitleDiv.style.position = "absolute";
 //				yearTitleDiv.style.width = "100%";
-yearTitleDiv.style.left = "10%";
-yearTitleDiv.style.top = "20%";
+yearTitleDiv.style.left = "15%";
+yearTitleDiv.style.top = "14%";
+//yearTitle.Div.style.
 
 
 var selected_country;
@@ -57,7 +60,6 @@ function addCountry(country){
     
 }
 function makeBarChart(selected_countries){
-    console.log("makebarchar called");
     if(selected_countries.length==0){
         
     }
@@ -122,9 +124,6 @@ var textScale = d3.scaleSqrt()
 var drag = d3.drag();
 
 function generateVis(){
-
-
-	console.log("display_year in generateVis:", display_year);
 
 	// Filter the data to only include the current year
 	var filtered_dataset = dataset.filter(yearFilter);
@@ -221,7 +220,6 @@ function generateVis(){
 	texts.transition()
 		.duration(1000)
 		.attr("x", function(d){
-        console.log("transitionting ");    
         return xScale(+d.GDP)})
 		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)});
     
@@ -245,8 +243,6 @@ function generateVis(){
 	setInterval(function(){
 	yearTitleElement.innerHTML = display_year; 800;
 	}, 200)
-	console.log(display_year);
-	console.log(yearTitleElement);
 	
 }
 
@@ -295,17 +291,32 @@ var xAxis = d3.axisBottom()
 		.attr("id", "x-axis")
 		.attr("transform", "translate(0," + svg_height + ")")
 		.call(xAxis);
-
+            
 	// Add axis labels
 	canvas.append("text")
 		.attr("class", "axis")
-		.attr("x", svg_width)
-		.attr("y", svg_height);
-
+		.attr("x", svg_width/4)
+		.attr("y", svg_height+50)
+        .text("Gross Domestic Product")
+            .style("font-size", "2vw");
+            
+    canvas.append("text")
+		.attr("class", "axis")
+		.attr("x", -svg_height/1.5)
+		.attr("y", 30)
+        .text("Global Competitiveness Index")
+           .style("font-size", "2vw")
+            .attr("transform", "rotate(-90)");
+    
+            
+//            .append("text")
+//          .attr("x", function(d) { return x(d) - 3; })
+//          .attr("y", barHeight / 2)
+//          .attr("dy", ".35em")
+//          .text(function(d, i) { return label[i]; });
 		// Finding smallest non-zero number for minimum year
 		min_year = d3.min(dataset.map(function(d){ return +d.Year || Infinity}));
 		max_year = d3.max(dataset.map(function(d){ return +d.Year}));
-		console.log("min_year/max_year:", min_year, max_year);
 		display_year = min_year
 		
 		// Calling main visualisation function
