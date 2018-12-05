@@ -98,6 +98,18 @@ function comparisonBarChart(countries) {
         .data(columns[0].values)
         .enter()
         .append("rect")
+        .on("mouseover", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(200)
+                .style("opacity", 1);
+        })
+         .on("mouseout", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 0.6)
+        })
         .attr("x", function (d, i) {
             return (i * (svg_width / columns[0].values.length));
         })
@@ -120,6 +132,18 @@ function comparisonBarChart(countries) {
     // transitions 
     compChart.selectAll("rect")
         .data(columns[0].values)
+        .on("mouseover", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 1);
+        })
+         .on("mouseout", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 0.6)
+        })
         .transition()
         .duration(500)
         .attr("x", function (d, i) {

@@ -126,9 +126,10 @@ var textScale = d3.scaleSqrt()
 //-_-_-M_-_-_A-_-_-I_-_-_N-_-_-
 //   VISUALISATION FUNCTION
 var drag = d3.drag();
+
 function generateVis(){
 
-    
+
 	console.log("display_year in generateVis:", display_year);
 
 	// Filter the data to only include the current year
@@ -136,7 +137,7 @@ function generateVis(){
 
 	/******** PERFORM DATA JOIN ************/
 	// Join new data with old elements, if any.
-	var circles = canvas.selectAll("circle")
+	var circles = canvas.selectAll(".updateCircle")
 	   .data(filtered_dataset);
     
 	var texts = canvas.selectAll(".countrylabel")
@@ -148,6 +149,9 @@ function generateVis(){
 	// *N Check for problem here
 	circles.enter()
 	   .append("circle")
+        .attr("class", function(d){
+        return "updateCircle";
+    })
 		.attr("cx", function(d){
         return xScale(+d.GDP)
 	   })
@@ -157,9 +161,21 @@ function generateVis(){
 	   .attr("r", function(d){return radiusScale(+d.Population)})
 		.style("fill", function(d){ return colourScale(d.Region)})
 	   .style("opacity", .7)
-
+        .on("mouseover", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 1);
+        })
+         .on("mouseout", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 0.7)
+        })
         .on("click", function (d) {
             addCountry(d.Country);
+            traceButtonChange();
             makeBarChart(selected_countries);
         })	   
         .transition()

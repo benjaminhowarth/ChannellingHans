@@ -95,12 +95,14 @@ function barChart(countries) {
         .ticks(15)
         .tickFormat(function (d) {
   var mapper = {
-    0: 5,
-      1: 4,
-      2: 3,
-      3: 2,
-      4: 1,
-      5:0
+    0: 7,
+      1: 6,
+      2: 5,
+      3: 4,
+      4: 3,
+      5:2,
+      6:1,
+      7:0
   }
   return mapper[d]
 });
@@ -127,6 +129,22 @@ function barChart(countries) {
         .data(columns[0].values)
         .enter()
         .append("rect")
+        .attr("zIndex",10)
+        .on("click", function() {
+        console.log("clicked");  
+    })
+        .on("mouseover", function() {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 1);
+        })
+//         .on("mouseout", function (d) {
+//            d3.select(this)
+//                .transition()
+//                .duration(500)
+//                .style("opacity", 0.7)
+//        })
         .attr("x", function (d, i) {
             console.log(d);
             return i * (svg_width / columns[0].values.length);
@@ -143,6 +161,18 @@ function barChart(countries) {
     // transitions 
     chart.selectAll("rect")
         .data(columns[0].values)
+        .on("mouseover", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 1);
+        })
+         .on("mouseout", function (d) {
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .style("opacity", 0.7)
+        })
         .transition()
         .duration(500)
         .attr("x", function (d, i) {
