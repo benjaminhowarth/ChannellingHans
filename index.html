@@ -17,17 +17,27 @@
 	<body>	
 		<!--SEARCH FOR NOTES WITH *N-->
 		<div id = "Title">
-			<h1 style="color: red">Channelling Hans</h1>
+			<h1 id= "ChannellingHansTitle" style="color: red">Channelling Hans</h1>
 		</div>
-		<div id = "Graph">
+        
+		<div id = "Graph" style="width:50%;">
 			<div id="YearDiv">
 			<h1 id="Year"></h1>
 			<h1 id= "Year2"></h1>
 			</div>
-			<div id="vis">
-			  <button id="play-button">Play</button>
-                <input type="checkbox" id="traces" unchecked onchange="showtrace()"> Show Traces<br>
+		
+			
+		<div style="display: table;box-sizing:border-box;width:100%;">
+        <div class="play_btn">
+			
+            <input type="button" id="play_btn" value="Start" style="font-size:50px;width:200px;height:100px" onclick="play_btn()" />
+        </div>	
+			
+			<div id="slider_div">
+				<input type="checkbox" id="traces" unchecked onchange="showtrace()"> Show Traces<br>
 			</div>
+            <div id="container" class = "svg-container"></div>
+            
 		</div>
         <div id = "CountryDiv1">
         <h1 id="Country1"></h1>
@@ -36,18 +46,26 @@
         <h1 id="Country2"></h1>
         </div>
         <h1 id="Countries"></h1>
+			
+		</div>
+        
+        <div id = "Charts" style="width:50%;">
+            <div id="container2" class = "svg-container2"></div>
+        </div>
 			<!--
-			***NOTES***
+			**NOTES**
 			aggregate mean mode 
 			interpolation linear python package input row 
 			-->
 			
 		<script type="text/javascript" src="./js/main.js" charset="UTF-8"></script>
 		
+		<script src="./js/animation_control.js"></script>
+	
 		<script type="text/javascript" src="./js/time_slider.js" charset="UTF-8"></script>
-		<script type="text/javascript" src="./js/animation_control.js" charset="UTF-8"></script>
         <script type="text/javascript" src="./js/barChart.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="./js/showtrace.js" charset="UTF-8"></script>
-		 <script type="text/javascript" src="./js/comparisonChart.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/time_slider.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="./js/showtrace.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="./js/comparisonChart.js" charset="UTF-8"></script>
 	</body>
 </html>

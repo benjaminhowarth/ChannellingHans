@@ -31,15 +31,36 @@ var selected_countries = [];
 
 // function to implement queue for counties
 function addCountry(country){
-    if (selected_countries.length < 2){
+    if (selected_countries.length<1){
+        console.log("1st if");
+        selected_countries.push(country);
+    }
+    else if (selected_countries.length == 1 && country !=selected_countries[0] ){
+        console.log("1 country and ");
         selected_countries.push(country);
         
     }
-    else{
-        console.log(selected_countries);
-        selected_countries.pop();
-        selected_countries.unshift(country);
+    else if(selected_countries.length==2){
+        if (country == selected_countries[0]){
+            selected_countries.pop();
+        }
+        else if (country == selected_countries[1]){
+            selected_countries.shift();
+        }
+            
+//            if (selected_countries[0]==selected_countries[1]){
+//            console.log("2 iff")
+//            selected_countries.pop();
+//        }
+
+        else{
+            console.log("final else");
+            console.log(selected_countries);
+            selected_countries.pop();
+            selected_countries.unshift(country);
+        }
     }
+    
     document.getElementById("Countries").innerHTML=selected_countries;
 }
 function makeBarChart(selected_countries){
@@ -48,6 +69,8 @@ function makeBarChart(selected_countries){
     }
     else if (selected_countries.length==1){
         barChart(selected_countries);
+        clearCompChart();
+        document.getElementById("Country2").innerHTML="";
     }
     else{
         barChart(selected_countries);
@@ -59,12 +82,15 @@ function makeBarChart(selected_countries){
 //SOME CODE TAKEN FROM PRACTICAL 5 SOLUTION
 
 // Create svg canvas
-var canvas = d3.select("body")
-		.append("svg")
-		.attr("width", svg_width + margin.left + margin.right)
-		.attr("height", svg_height + margin.top + margin.bottom)
-		.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var canvas = d3.select("div#container")
+        .append("svg")
+//		.attr("width", svg_width + margin.left + margin.right)
+//		.attr("height", svg_height + margin.top + margin.bottom)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "-30 -50 1000 1000")
+        .classed("svg_content", true);
+//		.append("g")
+//		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Creating y scale
 // We don't set the domain yet as data isn't loaded
@@ -76,7 +102,9 @@ var yScale = d3.scaleLinear()
 // We don't set the domain yet as data isn't loaded
 // *N WHAT DOES 0.1 DO HERE
 var xScale = d3.scaleLog()
-				.range([1, svg_width]);
+				.range([0.1, svg_width]);
+
+
 
 // Creating color scale
 var colourScale = d3.scaleOrdinal(d3.schemeCategory10);
@@ -86,45 +114,20 @@ var colourScale = d3.scaleOrdinal(d3.schemeCategory10);
 var radiusScale = d3.scaleSqrt()
 	.domain([0, 5e8])
 	.range([0, 50]);
+var textScale = d3.scaleSqrt()
+	.domain([0, 5e8])
+	.range([10, 40]);
 
 
-//Define Y axis
-var yAxis = d3.axisLeft()
-				  .scale(yScale)
-				  .ticks(10);
-
-// Create an x-axis connected to the x scale
-var xAxis = d3.axisBottom()
-			 .scale(xScale)
-			 .ticks(5);
-
-//		 Set format for x-axis ticks 
-		xAxis.tickFormat(d3.format(".0s"));
 		
 	// Call the y axis
-	canvas.append("g")
-		.attr("class", "axis")
-		.attr("id", "y-axis")
-		.call(yAxis);
-
-	// Call the x axis
-	canvas.append("g")
-		.attr("class", "axis")
-		.attr("id", "x-axis")
-		.attr("transform", "translate(0," + svg_height + ")")
-		.call(xAxis);
-
-	// Add axis labels
-	canvas.append("text")
-		.attr("class", "axis")
-		.attr("x", svg_width)
-		.attr("y", svg_height);
-
+	
 
 //-_-_-M_-_-_A-_-_-I_-_-_N-_-_-
 //   VISUALISATION FUNCTION
 var drag = d3.drag();
 function generateVis(){
+
 
 	console.log("display_year in generateVis:", display_year);
 
@@ -169,7 +172,7 @@ function generateVis(){
 		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)})
 		.attr("fill", "black")
 		.attr("class", "countrylabel")
-		.attr("font-size", function(d){return radiusScale(+d.Population)})
+		.attr("font-size", function(d){return textScale(+d.Population)})
          .on("click", function (d) {
             addCountry(d.Country);
             makeBarChart(selected_countries);
@@ -225,12 +228,52 @@ function generateVis(){
 
 
 
-		d3.csv("./data/GCI_CompleteData4.csv")
+		d3.csv("./data/GCI_CompleteData4_interpolated.csv")
 		  .then(function(data) {
 		      	  dataset = data;
 
-		xScale.domain([1, d3.max(dataset, function(d){	return +d.GDP})])
-		yScale.domain([1, d3.max(dataset, function(d){ return +d.Global_Competitiveness_Index})])
+		xScale.domain([d3.min(dataset, function(d) {return parseInt(d.GDP);}), d3.max(dataset, function(d) {return parseInt(d.GDP);})]);
+            
+		yScale.domain([d3.min(dataset, function(d) {return parseFloat(d.Global_Competitiveness_Index);}), d3.max(dataset, function(d) {return parseFloat(d.Global_Competitiveness_Index);})]);
+        var radiusScale = d3.scaleLinear()
+								 .domain([d3.min(dataset, function(d) {return parseFloat(d.Population);}), d3.max(dataset, function(d) {return parseFloat(d.Population);})])
+								 .range([10, 40]);
+        var margin = {top: 100, right: 100, bottom: 100, left: 100};
+        var outer_width = 1000;
+        var outer_height = 1000;
+        var svg_width = outer_width - margin.left - margin.right;
+        var svg_height = outer_height - margin.top - margin.bottom;
+//Define Y axis
+var yAxis = d3.axisLeft()
+				  .scale(yScale)
+				  .ticks(10);
+
+// Create an x-axis connected to the x scale
+var xAxis = d3.axisBottom()
+			 .scale(xScale)
+			 .ticks(3);
+
+//		 Set format for x-axis ticks 
+		xAxis.tickFormat(d3.format(".0s"));
+//        xAxis.tickFormat(function(d) {
+//                  return d.GDP;
+//              })
+        canvas.append("g")
+		.attr("class", "axis")
+		.attr("id", "y-axis")
+		.call(yAxis);
+	// Call the x axis
+	canvas.append("g")
+		.attr("class", "axis")
+		.attr("id", "x-axis")
+		.attr("transform", "translate(0," + svg_height + ")")
+		.call(xAxis);
+
+	// Add axis labels
+	canvas.append("text")
+		.attr("class", "axis")
+		.attr("x", svg_width)
+		.attr("y", svg_height);
 
 		// Finding smallest non-zero number for minimum year
 		min_year = d3.min(dataset.map(function(d){ return +d.Year || Infinity}));
@@ -242,7 +285,9 @@ function generateVis(){
 //			initialize_axis();
 			generateVis();
 			initialize_slider();
-		
+		    if(document.getElementById("traces").checked){
+                showtrace();
+            }
 		
 		
 		
@@ -256,3 +301,10 @@ function generateVis(){
 			// x log scale
 });
 
+//    var xScale = d3.scaleLog()
+//                 .domain([d3.min(dataset, function(d) {return parseInt(d.GDP);}), d3.max(dataset, function(d) {return parseInt(d.GDP);})])
+//                 .range([0.1, svg_width]);
+//
+//    var yScale = d3.scaleLinear()
+//                 .domain([d3.max(dataset, function(d) {return parseFloat(d.Global_Competitiveness_Index);}), d3.min(dataset, function(d) {return parseFloat(d.Global_Competitiveness_Index);})])
+//                 .range([0, svg_height]);

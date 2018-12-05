@@ -66,7 +66,7 @@ function initialize_slider() {
 
 
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 
 
@@ -238,13 +238,14 @@ function initialize_slider() {
 //    console.log("Slider moving: " + moving);
 //  })
 //
-//function hue(h) {
+function hue(h) {
 	display_year = Math.floor(x.invert(currentValue));
 	if (display_year != old_display_year){
 		generateVis();
         makeBarChart(selected_countries);
+        showtrace();
 	}
 	old_display_year = display_year;
 }
->>>>>>> 07eb94f268b3e9efc526a82eb7d3ea291fe88f17
+//>>>>>>> 07eb94f268b3e9efc526a82eb7d3ea291fe88f17
 	

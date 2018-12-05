@@ -12,13 +12,15 @@ var svg_width = outer_width - margin.left - margin.right;
 var svg_height = outer_height - margin.top - margin.bottom;
 var barPadding = 26;
 
-var compChart = d3.selectAll("body")
+var compChart = d3.select("div#container2")
     .append("svg")
-    .attr("width", svg_width + margin.left + margin.right)
-    .attr("height", svg_height + margin.top + margin.bottom)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "-100 -50 1000 1000")
+        .classed("svg_content", true)
     .attr("id", "secondChart")
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("z-index", 10);
+//    .append("g")
+//    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var countryNameDiv = document.getElementById("CountryDiv2");
 var countryNameElement = document.getElementById("Country2");
@@ -36,7 +38,6 @@ countryNameDiv.style.top = "150px";
 function comparisonBarChart(countries) {
     var columns = [];
     var i;
-
     function secondCountryFilter(value){
         return (value.Country == countries[1]);
     }
@@ -135,4 +136,7 @@ function comparisonBarChart(countries) {
     
     countryNameElement.innerHTML = selected_countries[1];
         
+}
+function clearCompChart(){
+    compChart.selectAll("rect").remove().transition(100);
 }

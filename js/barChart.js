@@ -12,13 +12,16 @@ var svg_width = outer_width - margin.left - margin.right;
 var svg_height = outer_height - margin.top - margin.bottom;
 var barPadding = 20;
 
-var chart = d3.select("body")
+var chart = d3.select("div#container2")
     .append("svg")
-    .attr("width", svg_width + margin.left + margin.right)
-    .attr("height", svg_height + margin.top + margin.bottom)
-    .attr("id", "firstChart")
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//    .attr("width", svg_width + margin.left + margin.right)
+//    .attr("height", svg_height + margin.top + margin.bottom)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "-30 -50 1000 1000")
+    .classed("svg_content", true)
+    .attr("id", "firstChart");
+//    .append("g")
+//    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var countryNameDiv1 = document.getElementById("CountryDiv1");
 var countryNameElement1 = document.getElementById("Country1");
@@ -93,6 +96,7 @@ function barChart(countries) {
         .enter()
         .append("rect")
         .attr("x", function (d, i) {
+            console.log(d);
             return i * (svg_width / columns[0].values.length);
         })
         .attr("y", function (d) {
