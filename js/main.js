@@ -32,11 +32,11 @@ var selected_countries = [];
 // function to implement queue for counties
 function addCountry(country){
     if (selected_countries.length<1){
-        console.log("1st if");
+        
         selected_countries.push(country);
     }
     else if (selected_countries.length == 1 && country !=selected_countries[0] ){
-        console.log("1 country and ");
+       
         selected_countries.push(country);
         
     }
@@ -49,13 +49,12 @@ function addCountry(country){
         }
             
 //            if (selected_countries[0]==selected_countries[1]){
-//            console.log("2 iff")
+
 //            selected_countries.pop();
 //        }
 
         else{
-            console.log("final else");
-            console.log(selected_countries);
+           
             selected_countries.pop();
             selected_countries.unshift(country);
         }
@@ -64,6 +63,7 @@ function addCountry(country){
     document.getElementById("Countries").innerHTML=selected_countries;
 }
 function makeBarChart(selected_countries){
+    console.log("makebarchar called");
     if(selected_countries.length==0){
         
     }
@@ -128,7 +128,7 @@ var textScale = d3.scaleSqrt()
 var drag = d3.drag();
 function generateVis(){
 
-
+    
 	console.log("display_year in generateVis:", display_year);
 
 	// Filter the data to only include the current year
@@ -149,7 +149,6 @@ function generateVis(){
 	circles.enter()
 	   .append("circle")
 		.attr("cx", function(d){
-        console.log("stuff");
         return xScale(+d.GDP)
 	   })
 
@@ -182,7 +181,6 @@ function generateVis(){
 	/******** HANDLE UPDATE SELECTION ************/
 	// Update the display of existing elements to match new data
 	circles.transition()
-		.duration(1000)
 		.attr("cx", function(d){ return xScale(+d.GDP)
 	   })
 		.attr("cy", function(d){ return yScale(+d.Global_Competitiveness_Index)
@@ -191,13 +189,16 @@ function generateVis(){
 		.style("opacity", .7)
 		.transition()
 		.duration(1000);
+//        .call(makeBarChart(selected_countries));
 
 
 	texts.transition()
 		.duration(1000)
-		.attr("x", function(d){return xScale(+d.GDP)})
+		.attr("x", function(d){
+        console.log("transitionting ");    
+        return xScale(+d.GDP)})
 		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)});
-
+    
 
 	/******** HANDLE EXIT SELECTION ************/
 
@@ -211,7 +212,7 @@ function generateVis(){
 
 	texts.exit()
 	.remove();
-//
+    makeBarChart(selected_countries);
 	// Set the year label
 	d3.select("#year_header").text("Year: " + display_year)
 
@@ -285,6 +286,7 @@ var xAxis = d3.axisBottom()
 //			initialize_axis();
 			generateVis();
 			initialize_slider();
+            makeBarChart(selected_countries);
 		    if(document.getElementById("traces").checked){
                 showtrace();
             }

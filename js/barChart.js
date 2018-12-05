@@ -17,7 +17,7 @@ var chart = d3.select("div#container2")
 //    .attr("width", svg_width + margin.left + margin.right)
 //    .attr("height", svg_height + margin.top + margin.bottom)
     .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "-30 -50 1000 1000")
+    .attr("viewBox", "-30 -50 1500 1500")
     .classed("svg_content", true)
     .attr("id", "firstChart");
 //    .append("g")

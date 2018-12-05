@@ -15,10 +15,11 @@ var barPadding = 26;
 var compChart = d3.select("div#container2")
     .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "-30 -50 1000 1000")
+        .attr("viewBox", "-30 -50 1500 1500")
         .classed("svg_content", true)
     .attr("id", "secondChart")
-    .attr("z-index", 10);
+    .attr("z-index", 10)
+    .attr("margin",500);
 //    .append("g")
 //    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -69,26 +70,26 @@ function comparisonBarChart(countries) {
         .paddingOuter(0.05);
 
     // Create an x-axis connected to the x scale
-    var xAxis = d3.axisBottom()
-        .scale(xScale)
-        .ticks(12);
-
-    //Define Y axis
-    var yAxis = d3.axisLeft()
-        .scale(yScale)
-        .ticks(5);
-
-    // Call the x-axis
-    compChart.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(0," + svg_height + ")")
-        .call(xAxis);
-
-    // Call the y axis
-    compChart.append("g")
-        .attr("class", "axis")
-        .call(yAxis);
-                        
+//    var xAxis = d3.axisBottom()
+//        .scale(xScale)
+//        .ticks(12);
+//
+//    //Define Y axis
+//    var yAxis = d3.axisLeft()
+//        .scale(yScale)
+//        .ticks(5);
+//
+//    // Call the x-axis
+//    compChart.append("g")
+//        .attr("class", "axis")
+//        .attr("transform", "translate(0," + svg_height + ")")
+//        .call(xAxis);
+//
+//    // Call the y axis
+//    compChart.append("g")
+//        .attr("class", "axis")
+//        .call(yAxis);
+//                        
     // Add rectangles
     
     console.log("comp ",columns);

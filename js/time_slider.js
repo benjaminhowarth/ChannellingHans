@@ -46,6 +46,10 @@ function initialize_slider() {
 //				console.log("else display_year: ", display_year);
 //            }
             generateVis();
+            console.log("calling");
+            makeBarChart(selected_countries);
+            console.log("called");
+            showtrace();
         });
 	
 	var x = d3.scaleLinear()
@@ -239,10 +243,14 @@ function initialize_slider() {
 //  })
 //
 function hue(h) {
+    console.log("inhue h");
 	display_year = Math.floor(x.invert(currentValue));
 	if (display_year != old_display_year){
+        console.log("");
 		generateVis();
+        console.log("calling");
         makeBarChart(selected_countries);
+        console.log("called");
         showtrace();
 	}
 	old_display_year = display_year;
