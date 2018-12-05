@@ -15,26 +15,17 @@ var barPadding = 26;
 var compChart = d3.select("div#container2")
     .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "-30 -50 1500 1500")
+        .attr("viewBox", "-30 -50 750 750")
         .classed("svg_content", true)
     .attr("id", "secondChart")
-    .attr("z-index", 10)
-    .attr("margin",500);
+    .attr("z-index", 10);
+//    .attr("margin",500);
 //    .append("g")
 //    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var countryNameDiv = document.getElementById("CountryDiv2");
 var countryNameElement = document.getElementById("Country2");
-//var year2TitleElement = document.getElementById("Year2");
-countryNameElement.style.color = "blue";
-countryNameElement.style.fontSize = "150px";
-countryNameElement.style.opacity = ".6";
-countryNameElement.style.fontFamily = "Roboto";
-countryNameDiv.style.zIndex = "-10";
-countryNameDiv.style.position = "absolute";
-//				yearTitleDiv.style.width = "100%";
-countryNameDiv.style.left = "1500px";
-countryNameDiv.style.top = "150px";
+
 
 function comparisonBarChart(countries) {
     var columns = [];

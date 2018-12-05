@@ -1,6 +1,6 @@
 
 // Defining margins, width and height
-var margin = {top: 100, right: 100, bottom: 100, left: 100};
+var margin = {top: 100, right: 160, bottom: 100, left: 100};
 var outer_width = 1000;
 var outer_height = 1000;
 var svg_width = outer_width - margin.left - margin.right;
@@ -16,14 +16,14 @@ var yearTitleDiv = document.getElementById("YearDiv");
 var yearTitleElement = document.getElementById("Year");
 var year2TitleElement = document.getElementById("Year2");
 yearTitleElement.style.color = "grey";
-yearTitleElement.style.fontSize = "200px";
+yearTitleElement.style.fontSize = "8vw";
 yearTitleElement.style.opacity = ".6";
 yearTitleElement.style.fontFamily = "Roboto";
 yearTitleDiv.style.zIndex = "-10";
 yearTitleDiv.style.position = "absolute";
 //				yearTitleDiv.style.width = "100%";
-yearTitleDiv.style.left = "350px";
-yearTitleDiv.style.top = "300px";
+yearTitleDiv.style.left = "10%";
+yearTitleDiv.style.top = "20%";
 
 
 var selected_country;
@@ -47,11 +47,6 @@ function addCountry(country){
         else if (country == selected_countries[1]){
             selected_countries.shift();
         }
-            
-//            if (selected_countries[0]==selected_countries[1]){
-
-//            selected_countries.pop();
-//        }
 
         else{
            
@@ -60,7 +55,6 @@ function addCountry(country){
         }
     }
     
-    document.getElementById("Countries").innerHTML=selected_countries;
 }
 function makeBarChart(selected_countries){
     console.log("makebarchar called");
@@ -87,7 +81,7 @@ var canvas = d3.select("div#container")
 //		.attr("width", svg_width + margin.left + margin.right)
 //		.attr("height", svg_height + margin.top + margin.bottom)
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "-30 -50 1000 1000")
+        .attr("viewBox", "-30 -50 1100 1100")
         .classed("svg_content", true);
 //		.append("g")
 //		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -171,7 +165,7 @@ function generateVis(){
             d3.select(this)
                 .transition()
                 .duration(500)
-                .style("opacity", 0.7)
+                .style("opacity", 0.7);
         })
         .on("click", function (d) {
             addCountry(d.Country);
@@ -188,10 +182,26 @@ function generateVis(){
 		.attr("fill", "black")
 		.attr("class", "countrylabel")
 		.attr("font-size", function(d){return textScale(+d.Population)})
+        .on("mouseover", function () {
+//            d3.select(this)
+//                .transition()
+//                .duration(100)
+//                .attr("fill", "orange");
+        })
+         .on("mouseout", function () {
+            d3.select(this)
+                .transition()
+                .duration(100)
+                .style("fill", "black");
+        })
          .on("click", function (d) {
             addCountry(d.Country);
             makeBarChart(selected_countries);
-        })	   
+            d3.select(this)
+                .transition()
+                .duration(100)
+                .attr("fill", "orange");
+        })
 		.text(function(d){return d.Country})
 
 	/******** HANDLE UPDATE SELECTION ************/

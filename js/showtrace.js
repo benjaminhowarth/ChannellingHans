@@ -37,7 +37,7 @@ function generateTrail(country) {
 		.attr("cx", function(d){
         return xScale(+d.GDP)
 	   })
-
+        
 	   .attr("cy", function(d){ return yScale(+d.Global_Competitiveness_Index)})
 
 	   .attr("r", function(d){return radiusScale(+d.Population)})
@@ -51,9 +51,10 @@ function generateTrail(country) {
     
     }
               )
-	   .style("opacity", .2)
+	   .style("fill-opacity", "0.08")
         .style("stroke", "black")
-        .style("stroke-width", 3);
+    .style("stroke-opacity", ".5")
+        .style("stroke-width", 1);
 
 }
 function removeTrail(){

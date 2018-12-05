@@ -17,7 +17,7 @@ var chart = d3.select("div#container2")
 //    .attr("width", svg_width + margin.left + margin.right)
 //    .attr("height", svg_height + margin.top + margin.bottom)
     .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "-30 -50 1500 1500")
+    .attr("viewBox", "-30 -50 750 750")
     .classed("svg_content", true)
     .attr("id", "firstChart");
 //    .append("g")
@@ -25,16 +25,7 @@ var chart = d3.select("div#container2")
 
 var countryNameDiv1 = document.getElementById("CountryDiv1");
 var countryNameElement1 = document.getElementById("Country1");
-//var year2TitleElement = document.getElementById("Year2");
-countryNameElement1.style.color = "red";
-countryNameElement1.style.fontSize = "150px";
-countryNameElement1.style.opacity = ".6";
-countryNameElement1.style.fontFamily = "Roboto";
-countryNameDiv1.style.zIndex = "-10";
-countryNameDiv1.style.position = "absolute";
-//				yearTitleDiv.style.width = "100%";
-countryNameDiv1.style.left = "1500px";
-countryNameDiv1.style.top = "700px";
+
 function barChart(countries) {
     
     var columns = [];

@@ -12,8 +12,30 @@ body {
 
 }
 
-
-
+#CountryDiv1, #CountryDiv2{
+    z-index: -10;
+    position: absolute;
+    left:51%;
+}
+#CountryDiv1{
+    top:6%;
+}
+#CountryDiv2{
+    
+    top:1%;
+}
+#Country1, #Country2 {
+    font-size: 3vw;
+    opacity: .6;
+    font-family: "Roboto";
+    
+}
+#Country2{
+    color:blue;
+}
+#Country1{
+    color: red;
+}
 
 
 
@@ -171,5 +193,14 @@ secondChart{
 
 */
 container2{
-    
+    height: 100%;
+}
+#secondChart{
+    height: 100%;
+}
+#firstChart{
+    height: 100%;
+}
+#container{
+    max-height: 100%;
 }
