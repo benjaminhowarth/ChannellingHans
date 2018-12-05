@@ -56,33 +56,65 @@ function barChart(countries) {
 
     //                    // Create a scale to scale values nicely for bar heights
     var yScale = d3.scaleLinear()
-        .domain([5, 0])
+        .domain([7,0])
         .range([svg_height, 0]);
+    
 
     // Create a scale object to take care of positioning bars along the horizontal axis
     var xScale = d3.scaleBand()
-        .domain(chart_dataset.map(function (d) {
-            return d3.keys(chart_dataset[0]);
-        }))
-        .range([0, svg_width], 0.1)
+        .domain([1,2,3,4,5,6,7,8,9,10,11,12])
+        .range([0,svg_width])
         .paddingInner(0.05)
         .paddingOuter(0.05);
-
+        
     // Create an x-axis connected to the x scale
     var xAxis = d3.axisBottom()
         .scale(xScale)
-        .ticks(12);
+        .ticks(12)
+        .tickFormat(function (d) {
+      var mapper = {
+          1: "Institutions",
+          2: "Infrastructure",
+          3: "Macroeconomic_environment",
+          4: "Health_and_primary_education",
+          5: "Higher_education_and_training",
+          6: "Goods_market_efficiency",
+          7: "Labor_market_efficiency",
+          8: "Financial_market_development",
+          9: "Technological_readiness", 
+          10: "Market_size",
+          11: "Business_sophistication",
+          12: "Innovation"
+      }
+      return mapper[d]
+    });
 
     //Define Y axis
     var yAxis = d3.axisLeft()
         .scale(yScale)
-        .ticks(5);
+        .ticks(15)
+        .tickFormat(function (d) {
+  var mapper = {
+    0: 5,
+      1: 4,
+      2: 3,
+      3: 2,
+      4: 1,
+      5:0
+  }
+  return mapper[d]
+});
 
     // Call the x-axis
     chart.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(0," + svg_height + ")")
-        .call(xAxis);
+        .call(xAxis)
+        .selectAll("text")
+        .attr("dy","-.05em")
+        .style("text-anchor", "end")
+        .attr("dx", "-.7em")
+        .attr("transform", "rotate(-45)");
 
     // Call the y axis
     chart.append("g")
@@ -114,7 +146,7 @@ function barChart(countries) {
         .transition()
         .duration(500)
         .attr("x", function (d, i) {
-            return i * (svg_width / columns[0].values.length);
+            return i * (svg_width / columns[0].values.length)+8;
         })
         .attr("y", function (d) {
             return parseInt(svg_height - yScale(d));

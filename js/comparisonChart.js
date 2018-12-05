@@ -57,7 +57,7 @@ function comparisonBarChart(countries) {
 
     //                    // Create a scale to scale values nicely for bar heights
     var yScale = d3.scaleLinear()
-        .domain([5, 0])
+        .domain([7, 0])
         .range([svg_height, 0]);
 
     // Create a scale object to take care of positioning bars along the horizontal axis
@@ -99,7 +99,7 @@ function comparisonBarChart(countries) {
         .enter()
         .append("rect")
         .attr("x", function (d, i) {
-            return i * (svg_width / columns[0].values.length);
+            return (i * (svg_width / columns[0].values.length));
         })
         .attr("y", function (d) {
             return parseInt(svg_height - yScale(d));
@@ -123,7 +123,7 @@ function comparisonBarChart(countries) {
         .transition()
         .duration(500)
         .attr("x", function (d, i) {
-            return i * (svg_width / columns[0].values.length)+((svg_width / columns[0].values.length) - barPadding);
+            return i * (svg_width / columns[0].values.length)+((svg_width / columns[0].values.length) - barPadding)+8;
         })
         .attr("y", function (d) {
             return parseInt(svg_height - yScale(d));
