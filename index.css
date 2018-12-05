@@ -70,3 +70,13 @@ body {
 	stroke-opacity: 0.5;
 	stroke-width: 1.25px;
 }
+#secondChart{
+    position: absolute;
+    top: 10;
+    left: 1050;
+}
+#firstChart{
+    position: absolute;
+    top: 800;
+    left: 1050;
+}

@@ -6,8 +6,8 @@ var margin = {
     left: 40
 };
 //Chart Width and height
-var outer_width = 1200;
-var outer_height = 550;
+var outer_width = 600;
+var outer_height = 500;
 var svg_width = outer_width - margin.left - margin.right;
 var svg_height = outer_height - margin.top - margin.bottom;
 var barPadding = 20;
@@ -16,14 +16,28 @@ var chart = d3.select("body")
     .append("svg")
     .attr("width", svg_width + margin.left + margin.right)
     .attr("height", svg_height + margin.top + margin.bottom)
+    .attr("id", "firstChart")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var countryNameDiv1 = document.getElementById("CountryDiv1");
+var countryNameElement1 = document.getElementById("Country1");
+//var year2TitleElement = document.getElementById("Year2");
+countryNameElement1.style.color = "red";
+countryNameElement1.style.fontSize = "150px";
+countryNameElement1.style.opacity = ".6";
+countryNameElement1.style.fontFamily = "Roboto";
+countryNameDiv1.style.zIndex = "-10";
+countryNameDiv1.style.position = "absolute";
+//				yearTitleDiv.style.width = "100%";
+countryNameDiv1.style.left = "1500px";
+countryNameDiv1.style.top = "700px";
 function barChart(countries) {
     
     var columns = [];
 
     function countryFilter(value) {
-        return (value.Country == countries);
+        return (value.Country == countries[0]);
     }
 
     var filtered_datset = dataset.filter(yearFilter);
@@ -88,7 +102,8 @@ function barChart(countries) {
         .attr("height", function (d) {
             return yScale(d);
         })
-        .attr("fill", "blue");
+        .attr("fill", "red")
+    .attr("opacity", 0.6);
     // transitions 
     chart.selectAll("rect")
         .data(columns[0].values)
@@ -104,6 +119,8 @@ function barChart(countries) {
         .attr("height", function (d) {
             return yScale(d);
         })
-        .attr("fill", "red");
-        
+        .attr("fill", "red")
+    .attr("opacity", 0.6);
+    
+        countryNameElement1.innerHTML = selected_countries[0];
 }
