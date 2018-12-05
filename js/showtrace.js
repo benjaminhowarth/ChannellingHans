@@ -1,18 +1,17 @@
 function showtrace(){
-    if(document.getElementById("traces").checked){
-        if(selected_countries.length<2){
-            console.log("generate trail for 1 called");
-            generateTrail(selected_countries[0]);
-        }
-        else{
-            generateTrail(selected_countries[0]);
-            generateTrail(selected_countries[1]);
-        }
+    if(selected_countries.length<2){
+        console.log("generate trail for 1 called");
+        generateTrail(selected_countries[0]);
     }
     else{
-        console.log("falsie");
-        generateVis();
+        generateTrail(selected_countries[0]);
+        generateTrail(selected_countries[1]);
     }
+    }
+//    else{
+//        console.log("falsie");
+//        generateVis();
+//    }
 }
 
 function generateTrail(country) {
@@ -38,8 +37,17 @@ function generateTrail(country) {
 	   .attr("cy", function(d){ return yScale(+d.Global_Competitiveness_Index)})
 
 	   .attr("r", function(d){return radiusScale(+d.Population)})
-		.style("fill", function(d){ return colourScale(d.Region)})
-	   .style("opacity", .7)
+		.style("fill", function(d){ 
+        if(country==selected_countries[0]){
+                    return "red"
+            }
+        else{
+            return "blue"
+        }
+    
+    }
+              )
+	   .style("opacity", .5)
 
         .on("click", function (d) {
             addCountry(d.Country);
