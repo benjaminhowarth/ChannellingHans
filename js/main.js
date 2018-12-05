@@ -12,7 +12,6 @@ display_year = null;
 function yearFilter(value){
 	return (value.Year == display_year)
 }
-
 var yearTitleDiv = document.getElementById("YearDiv");
 var yearTitleElement = document.getElementById("Year");
 var year2TitleElement = document.getElementById("Year2");
@@ -115,6 +114,8 @@ var xAxis = d3.axisBottom()
 var drag = d3.drag();
 function generateVis(){
 
+	console.log("display_year in generateVis:", display_year);
+
 	// Filter the data to only include the current year
 	var filtered_dataset = dataset.filter(yearFilter);
 
@@ -204,6 +205,7 @@ function generateVis(){
 	}, 200)
 	console.log(display_year);
 	console.log(yearTitleElement);
+	
 }
 
 //-_-_-E_-_-_N-_-_-D_-_-_
@@ -225,7 +227,11 @@ function generateVis(){
 		display_year = min_year
 		
 		// Calling main visualisation function
-		generateVis();
+//			initialize_axis();
+			generateVis();
+			initialize_slider();
+		
+		
 		
 		
 		// Notes:
