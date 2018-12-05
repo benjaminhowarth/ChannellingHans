@@ -4,6 +4,21 @@ body {
 	color: #696969;
 }
 
+
+
+#Graph {
+  
+    float: left;
+
+}
+
+
+
+
+
+
+
+
 .axis path,
 .axis line {
 	fill: none;
@@ -70,6 +85,8 @@ body {
 	stroke-opacity: 0.5;
 	stroke-width: 1.25px;
 }
+
+
 #secondChart{
     display: inline-block;
     width: 100%;
@@ -99,6 +116,7 @@ body {
 	overflow: hidden; 
 }
 */
+
 .svg-container {
     display: inline-block;
     position: relative;
@@ -106,6 +124,13 @@ body {
     vertical-align: top;
     overflow: hidden;
 }
+/*
+#Charts {
+
+    float: left;
+
+*/
+/*
 
 .svg-container2 {
     display: inline-block;
@@ -115,6 +140,7 @@ body {
     vertical-align: top;
     overflow: hidden;
 }
+*/
 
 .svg-content {
     display: inline-block;
@@ -124,9 +150,14 @@ body {
     
 }
 
+/*
+
 svg{
     background: yellow;
 }
+*/
+/*
+
 
 
 #secondChart{
@@ -136,3 +167,6 @@ svg{
 secondChart{
     background: grey;
 }
+*/
+
+*/

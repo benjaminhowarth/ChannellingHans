@@ -15,7 +15,7 @@ var barPadding = 26;
 var compChart = d3.select("div#container2")
     .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "-100 -50 1000 1000")
+        .attr("viewBox", "-30 -50 1000 1000")
         .classed("svg_content", true)
     .attr("id", "secondChart")
     .attr("z-index", 10);
