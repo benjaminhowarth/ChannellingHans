@@ -33,9 +33,6 @@ function initialize_slider() {
                 display_year = years_more_than_this[0];
             } 
             generateVis();
-        
-            makeBarChart(selected_countries);
-            showtrace();
         });
 	
 	var x = d3.scaleLinear()

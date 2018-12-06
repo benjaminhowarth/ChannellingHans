@@ -106,6 +106,7 @@ function barChart(countries) {
         .style("text-anchor", "end")
         .attr("dx", "-.7em")
         .attr("transform", "rotate(-45)");
+		
 
     // Call the y axis
     chart.append("g")
@@ -113,12 +114,19 @@ function barChart(countries) {
         .call(yAxis);
                 
     chart.append("text")
-		.attr("class", "axis")
-		.attr("x", -svg_width/1.2)
-		.attr("y", -16)
-        .text("Global Competitiveness Index")
-           .style("font-size", "1.4vw")
+		.attr("id", "chart_id")
+		.call(function(){
+		if (barChartMade == false){
+			d3.select("#chart_id").attr("class", "axis")
+			.attr("x", -svg_width/1.6)
+			.attr("y", -16)
+        	.text("Pillar Values")
+            .style("font-size", "1.15vw")
             .attr("transform", "rotate(-90)");
+		}
+		
+	})
+		
                         
     // Add rectangles
 

@@ -28,7 +28,7 @@ yearTitleDiv.style.left = "15%";
 yearTitleDiv.style.top = "14%";
 //yearTitle.Div.style.
 
-
+barChartMade = false;
 var selected_country;
 var selected_countries = [];
 
