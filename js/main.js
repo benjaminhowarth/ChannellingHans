@@ -184,29 +184,32 @@ function generateVis(){
          .on("click", function (d) {
             addCountry(d.Country);
             makeBarChart(selected_countries);
+			traceButtonChange();
         })
 		.text(function(d){return d.Country})
 
 	/******** HANDLE UPDATE SELECTION ************/
 	// Update the display of existing elements to match new data
 	circles.transition()
+		.duration(1000)
 		.attr("cx", function(d){ return xScale(+d.GDP)
 	   })
 		.attr("cy", function(d){ return yScale(+d.Global_Competitiveness_Index)
 	   })
 		.attr("r", function(d){ return radiusScale(+d.Population)}).style("fill", function(d){ return colourScale(d.Region)})
 		.style("opacity", .7)
-		.transition()
-		.duration(1000);
+
 //        .call(makeBarChart(selected_countries));
 
 
 	texts
+		.transition()
+		.duration(1000)
 		.attr("x", function(d){
         return xScale(+d.GDP)})
-		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)})
-    .transition()
-		.duration(1000);
+		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)});
+    
+		
     
 
 	/******** HANDLE EXIT SELECTION ************/

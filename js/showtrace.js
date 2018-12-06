@@ -34,6 +34,11 @@ function generateTrail(country) {
     trace.enter()
 	   .append("circle")
         .attr("class", "traceCircles")
+		.on("click", function (d) {
+            addCountry(d.Country);
+            traceButtonChange();
+            makeBarChart(selected_countries);
+        })	   
 		.attr("cx", function(d){
         return xScale(+d.GDP)
 	   })
