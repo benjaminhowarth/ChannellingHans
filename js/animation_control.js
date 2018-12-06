@@ -30,7 +30,7 @@ function play() {
 //		current_value = d3.select("slider_div").property("value") -1;
 //        generateVis();
 		
-    }, 1000);
+    }, 4000);
 }
 
 function pause() {

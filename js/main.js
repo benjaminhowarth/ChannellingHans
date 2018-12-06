@@ -181,25 +181,9 @@ function generateVis(){
 		.attr("fill", "black")
 		.attr("class", "countrylabel")
 		.attr("font-size", function(d){return textScale(+d.Population)})
-        .on("mouseover", function () {
-//            d3.select(this)
-//                .transition()
-//                .duration(100)
-//                .attr("fill", "orange");
-        })
-         .on("mouseout", function () {
-            d3.select(this)
-                .transition()
-                .duration(100)
-                .style("fill", "black");
-        })
          .on("click", function (d) {
             addCountry(d.Country);
             makeBarChart(selected_countries);
-            d3.select(this)
-                .transition()
-                .duration(100)
-                .attr("fill", "orange");
         })
 		.text(function(d){return d.Country})
 
@@ -217,11 +201,12 @@ function generateVis(){
 //        .call(makeBarChart(selected_countries));
 
 
-	texts.transition()
-		.duration(1000)
+	texts
 		.attr("x", function(d){
         return xScale(+d.GDP)})
-		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)});
+		.attr("y", function(d){return yScale(+d.Global_Competitiveness_Index)})
+    .transition()
+		.duration(1000);
     
 
 	/******** HANDLE EXIT SELECTION ************/
